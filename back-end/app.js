@@ -3,6 +3,7 @@ const express = require('express') // CommonJS import style!
 const morgan = require('morgan') // middleware for nice logging of incoming HTTP requests
 const cors = require('cors') // middleware for enabling CORS (Cross-Origin Resource Sharing) requests.
 const mongoose = require('mongoose')
+const path = require('path')
 
 const app = express() // instantiate an Express object
 app.use(morgan('dev', { skip: (req, res) => process.env.NODE_ENV === 'test' })) // log all incoming requests, except when in unit test mode.  morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -21,6 +22,21 @@ mongoose
 // load the dataabase models we want to deal with
 const { Message } = require('./models/Message')
 const { User } = require('./models/User')
+
+//about us route
+app.get('/api/about', (req, res) => {
+  const base = `${req.protocol}://${req.get('host')}` // e.g., http://localhost:5002
+  res.json({
+    name: 'Shaurya Srivastava',
+    title: 'Student, Builder, Runner',
+    imageUrl: `${base}/static/images/Shauryamcpic.jpeg`,
+    paragraphs: [
+      "Hi! I’m Shaurya. I study business and computer science and work in product management in the fintech space!\n\n",
+      "I've also worked on a bunch of projects of my own, including voice-AI interview tools and productivity integrations with calendars and messaging. I am also a member of the NYU XCTF team.\n\n",
+      "Outside class, I’m training for a sub-15 5k and reading about fintech!"
+    ]
+  })
+})
 
 // a route to handle fetching all messages
 app.get('/messages', async (req, res) => {
