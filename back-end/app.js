@@ -32,7 +32,6 @@ app.get('/api/about', (req, res) => {
   res.json({
     name: 'Shaurya Srivastava',
     title: 'Student, Builder, Runner',
-    imageUrl: `${base}/static/images/shaurya.jpg`,
     paragraphs: [
       "Hi! I’m Shaurya. I study business and computer science and work in product management in the fintech space!\n\n",
       "I've also worked on a bunch of projects of my own, including voice-AI interview tools and productivity integrations with calendars and messaging. I am also a member of the NYU XCTF team.\n\n",
